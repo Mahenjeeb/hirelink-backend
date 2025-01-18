@@ -24,11 +24,11 @@ const createUser = async (req, resp) => {
   }
 };
 const getAllUsers = async (_,resp) => {
-  const users = await userModel.find();
+  const users = await userModel.find().select('-password');
   if(users.length === 0) {
     return resp.status(404).json({ message: "No Records Found" });
   }
-  return resp.status(200).json({ message: "User details fetched successfully" });
+  return resp.status(200).json({data: users});
 }
 
 const updateUserDetails = async (req, resp) => {
