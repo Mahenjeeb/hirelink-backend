@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import userModel from "../models/userModel.js";
 import bcrypt from "bcryptjs";
+
 const createUser = async (req, resp) => {
   let { username, email, password, isAdmin } = req.body;
   try {
@@ -22,6 +23,13 @@ const createUser = async (req, resp) => {
     return resp.status(500).json({ message: "Internal Server Error" });
   }
 };
+const getAllUsers = async (_,resp) => {
+  const users = await userModel.find();
+  if(users.length === 0) {
+    return resp.status(404).json({ message: "No Records Found" });
+  }
+  return resp.status(200).json({ message: "User details fetched successfully" });
+}
 
 const updateUserDetails = async (req, resp) => {
   let { id } = req.params;
@@ -82,4 +90,4 @@ const deleteUser = async (req, resp) => {
   }
 };
 
-export { createUser, updateUserDetails, loginUser, deleteUser };
+export { createUser, getAllUsers, updateUserDetails, loginUser, deleteUser };
