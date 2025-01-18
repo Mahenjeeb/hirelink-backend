@@ -18,7 +18,7 @@ app.use(express.json());
 
 // app.use(errorHandler);
 app.get('/',(req,resp) => {
-    resp.status(200).json({message:'Server deployed'})
+    resp.status(200).json({message:'Server deployed dev'})
 })
 
 const PORT = process.env.PORT || 5000;
