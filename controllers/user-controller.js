@@ -40,13 +40,6 @@ const updateUserDetails = async (req, resp) => {
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return resp.status(404).json({ message: "Invalid Id" });
     }
-    if (email === "" || isAdmin === "") {
-      return resp.status(404).json({ message: "Please fill mandatory fileds" });
-    }
-    let isUpdated = await userModel.findById({_id: id});
-    if (isUpdated.email === email && isUpdated.isAdmin == isAdmin) {
-      return resp.status(200).json({ message: "Already updated" });
-    }
     await userModel.findByIdAndUpdate(filter, update, {
       new: true,
       runValidators: true,

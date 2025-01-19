@@ -17,7 +17,7 @@ app.use(
   })
 );
 app.use('/api/users',userRouter)
-app.get("/", (req, resp) => {
+app.get("/", (_, resp) => {
   resp.status(200).json({ message: "CRUD API for user" });
 });
 
